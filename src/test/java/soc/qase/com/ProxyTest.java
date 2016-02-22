@@ -6,8 +6,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import soc.qase.info.User;
 import soc.qase.test.AbstractTest;
+import soc.qase.test.server.QaseServer;
 
 /**
  * Created by Vojtech.Smital on 18.2.2016.
@@ -15,12 +18,25 @@ import soc.qase.test.AbstractTest;
 @RunWith(MockitoJUnitRunner.class)
 public class ProxyTest extends AbstractTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProxyTest.class);
+
     @Mock
     private CommunicationHandler communicationHandler;
 
     @InjectMocks
-    private Proxy proxy;
+    private static Proxy proxy;
 
+    public static void init() {
+        final Thread thread = new Thread() {
+            public void run() {
+                proxy = new Proxy(createUser(), true);
+                proxy.connect("127.0.0.1", QaseServer.getPort());
+            }
+        };
+        thread.start();
+    }
+
+    @Ignore
     @Test
     public void testProcessIncomingDataPacket_challangeProcessing() {
         setPrivateFieldValue(proxy, "user", createUser());
@@ -30,6 +46,7 @@ public class ProxyTest extends AbstractTest {
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
 
+    @Ignore
     @Test
     public void testProcessIncomingDataPacket_clientConnectProcessing() {
         setPrivateFieldValue(proxy, "user", createUser());
@@ -39,10 +56,9 @@ public class ProxyTest extends AbstractTest {
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
 
-    @Ignore
     @Test
     public void testProcessIncomingDataPacket_cmdConfigString() {
-        final String hexString = "001f3c73ce26080027d853490800450000536a6200008011bb6a0a0000680a0000666d066cfd003f10c401000080010000800c220000002a000000000000005468652045646765000b636d6420636f6e666967737472696e677320343220300a00";
+        final String hexString = "01000080010000800c220000002a000000000000005468652045646765000b636d6420636f6e666967737472696e677320343220300a00";
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
 
@@ -64,7 +80,7 @@ public class ProxyTest extends AbstractTest {
         return data;
     }
 
-    private User createUser() {
-        return null;
+    private static User createUser() {
+        return new User("QASE_Vojt", "female/athena", 65536, 0, 90, User.HAND_RIGHT, null);
     }
 }
