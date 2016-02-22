@@ -12,6 +12,8 @@
         <version.commons-lang>2.6</version.commons-lang>
         <version.guava>19.0</version.guava>
         <version.mockito>1.10.19</version.mockito>
+        <version.slf4j>1.7.16</version.slf4j>
+        <version.logback>1.1.5</version.logback>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +38,21 @@
                 <artifactId>mockito-all</artifactId>
                 <version>${version.mockito}</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -58,6 +75,18 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
         </dependency>
     </dependencies>
 
