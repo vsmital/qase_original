@@ -1,6 +1,5 @@
 package soc.qase.com;
 
-import junit.framework.TestCase;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,12 +7,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import soc.qase.info.User;
+import soc.qase.test.AbstractTest;
 
 /**
  * Created by Vojtech.Smital on 18.2.2016.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class ProxyTest extends TestCase {
+public class ProxyTest extends AbstractTest {
 
     @Mock
     private CommunicationHandler communicationHandler;
@@ -21,26 +21,25 @@ public class ProxyTest extends TestCase {
     @InjectMocks
     private Proxy proxy;
 
-    @Ignore
     @Test
     public void testProcessIncomingDataPacket_challangeProcessing() {
-        //proxy.setUser(createUser());
-        //proxy.sentChallenge = true;
+        setPrivateFieldValue(proxy, "user", createUser());
+        setPrivateFieldValue(proxy, "sentChallenge", true);
 
-        final String hexString = "ffffffff6368616c6c656e67652031323437333032323031";
+        final String hexString = "ffffffff6368616c6c656e67652036313933";
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
 
-    @Ignore
     @Test
     public void testProcessIncomingDataPacket_clientConnectProcessing() {
-        //proxy.setUser(createUser());
-        //proxy.sentConnect = true;
+        setPrivateFieldValue(proxy, "user", createUser());
+        setPrivateFieldValue(proxy, "sentConnect", true);
 
         final String hexString = "ffffffff636c69656e745f636f6e6e656374";
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
 
+    @Ignore
     @Test
     public void testProcessIncomingDataPacket_cmdConfigString() {
         final String hexString = "001f3c73ce26080027d853490800450000536a6200008011bb6a0a0000680a0000666d066cfd003f10c401000080010000800c220000002a000000000000005468652045646765000b636d6420636f6e666967737472696e677320343220300a00";
