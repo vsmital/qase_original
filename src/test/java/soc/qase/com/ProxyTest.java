@@ -56,11 +56,26 @@ public class ProxyTest extends AbstractTest {
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
 
+    @Ignore
     @Test
     public void testProcessIncomingDataPacket_cmdConfigString() {
         final String hexString = "01000080010000800c220000002a000000000000005468652045646765000b636d6420636f6e666967737472696e677320343220300a00";
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
+
+    @Ignore
+    @Test
+    public void testProcessIncomingDataPacket_serverSpawnBaseline() {
+        final String hexString = "0e0000800e0000000e83ca84017638010002800700f4580e800700f4580e0e808a80097702b0ed00000000b0ed1f000e808a8009790330f80000000030f81f000e828280057c0006e01700000006e0172c0e838280057da0ff0012e017a0ff0012e0172c0e838280057e6017a002e01f6017a002e01f2c0e838280057fe02ea01e200de02ea01e200d2b0b70726563616368652034320a00";
+        proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
+    }
+
+    @Ignore
+    @Test
+    public void testProcessIncomingDataPacket_serverConfigString() {
+        final String hexString = "10000080100000800d2005566f6a745c6d616c652f6772756e74000a02566f6a7420656e7465726564207468652067616d650a0014f1020000ffffffff00010211c2398030c012500b00000060000000005800000060000004010000000000005a43100000020064000500070012978a900b01ffff4000018030c012500b608030c012500b622080808001172028a013200d80808001288030c012000b80808001320028c012b80a8080800133c026c012b80a808080013400280014b80a80808001790000000030f8808080017fe02ea01e200d000001010009";
+        proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
+        }
 
     @Ignore
     @Test
