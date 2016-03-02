@@ -44,6 +44,7 @@ public class ServerPacket extends Packet
 		Message message = null;
 
 		messageType = (int)data[off];
+		System.out.println("MessageType:" + messageType);
 
 		if(messageType == 0) message = new ServerBad(data, off + 1);
 		else if(messageType == 1) message = new ServerPlayerMuzzleFlash(data, off + 1);

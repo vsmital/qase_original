@@ -6,6 +6,7 @@
 
 package soc.qase.com.message;
 
+import com.google.common.io.BaseEncoding;
 import soc.qase.tools.Utils;
 
 /*-------------------------------------------------------------------*/
@@ -25,6 +26,9 @@ public class ServerStuffText extends Message
 		int stringLength = Utils.stringLength(data, off);
 		stuffString = new String(Utils.stringValue(data, off, stringLength - 1));
 		setLength(stringLength + 1);
+		String characterInterpretation = "0d" + BaseEncoding.base16().encode(Utils.extractBytes(data, off, getLength())).toLowerCase();
+		characterInterpretation = characterInterpretation.replaceAll("..", "$0 ");
+		System.out.println(characterInterpretation);
 	}
 
 /*-------------------------------------------------------------------*/

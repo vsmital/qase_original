@@ -6,6 +6,7 @@
 
 package soc.qase.com.message;
 
+import com.google.common.io.BaseEncoding;
 import soc.qase.state.Angles;
 import soc.qase.state.Effects;
 import soc.qase.state.Entity;
@@ -53,6 +54,9 @@ public class ServerSpawnBaseline extends Message
 		entity.setSolid(processSolid());
 
 		setLength(offset - off);
+		String characterInterpretation = "0e" + BaseEncoding.base16().encode(Utils.extractBytes(data, off, getLength())).toLowerCase();
+		characterInterpretation = characterInterpretation.replaceAll("..", "$0 ");
+		System.out.println(characterInterpretation);
 	}
 
 /*-------------------------------------------------------------------*/

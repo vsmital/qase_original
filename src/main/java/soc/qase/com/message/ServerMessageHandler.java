@@ -189,7 +189,9 @@ public abstract class ServerMessageHandler extends Observable
 		if(verbose)
 			System.out.println("Processing: ServerSpawnBaseline");
 
-		world.setEntity(message.getEntity(), true);
+		if (world != null) {
+			world.setEntity(message.getEntity(), true);
+		}
 	}
 
 /*-------------------------------------------------------------------*/
