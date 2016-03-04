@@ -85,6 +85,12 @@ public class ProxyTest extends AbstractTest {
         proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
     }
 
+    @Test
+    public void testProcessIncomingDataPacket_serverFrame() {
+        final String hexString = "500000009c010080141703000016030000000102118612c822011b010ba2ff000000000000580000000400000000129b8080010129c822011b00c822011b010b0000";
+        proxy.processIncomingDataPacket(hexStringToByteArray(hexString));
+    }
+
     private byte[] hexStringToByteArray(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];
